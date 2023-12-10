@@ -13,6 +13,11 @@ const month = expiresDate.getMonth()
 const date = expiresDate.getDate()
 const day = expiresDate.getDay()
 
+const oneday = 24 * 60 * 60 * 1000
+const onehour = oneday / 24
+const oneminute = onehour / 60
+const onesecond = oneminute / 60
+
 expires.textContent = `giveaway offer expires ${days[day]}, ${months[month]} ${date}, ${year} at ${hours}:${minutes}`
 
 setInterval(update, 1000)
@@ -31,13 +36,13 @@ function getTimeRemaining() {
     const timems = now.getTime()
     let remaining = expiresDate.getTime() - timems
 
-    const days = Math.floor(remaining / (24 * 60 * 60 * 1000))
-    remaining = remaining - (days * 24 * 60 * 60 * 1000)
-    const hours = Math.floor(remaining / (60 * 60 * 1000))
-    remaining = remaining - (hours * 60 * 60 * 1000)
-    const minutes = Math.floor(remaining / (60 * 1000))
-    remaining = remaining - (minutes * 60 * 1000)
-    const seconds = Math.floor(remaining / 1000)
+    const days = Math.floor(remaining / oneday)
+    remaining = remaining - (days * oneday)
+    const hours = Math.floor(remaining / onehour)
+    remaining = remaining - (hours * onehour)
+    const minutes = Math.floor(remaining / oneminute)
+    remaining = remaining - (minutes * oneminute)
+    const seconds = Math.floor(remaining / onesecond)
 
     return {
         'days': days,
